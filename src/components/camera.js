@@ -200,7 +200,7 @@ class Camera extends Component {
               });
           }
         }catch(error){
-            console.log(error);
+            console.log("error",error);
             await this.setState({
                 txt_instructions: 'Error Occurs',
                 btn_command: 'try again',
