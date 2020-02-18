@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import {
   View,
@@ -7,7 +7,18 @@ import {
   Image,
   Button,
   ActivityIndicator,
+  Modal,
+  Dimensions,
 } from 'react-native';
+
+
+import {
+  TextInput,
+  Appbar,
+  Avatar,
+  TouchableRipple,
+  Menu
+} from "react-native-paper";
 
 import Styles from 'src/app-Style';
 
@@ -17,21 +28,44 @@ import frontright from 'src/assests/image/yaris.png';
 
 import frontleft from 'src/assests/image/yarsleft.png';
 
-import ImagePicker from 'react-native-image-picker';
 
-import vision, {firebase} from '@react-native-firebase/ml-vision';
+import Camera from "components/camera";
 
-import {utils} from '@react-native-firebase/app';
+import vision, { firebase } from '@react-native-firebase/ml-vision';
+
+import {
+  accelerometer,
+  gyroscope,
+  setUpdateIntervalForType,
+  SensorTypes
+} from "react-native-sensors";
+import { map, filter } from "rxjs/operators";
+//import {utils} from '@react-native-firebase/app';
 
 import Snackbar from 'react-native-snackbar';
 
+
 const Clarifai = require('clarifai');
+
+setTimeout(() => {
+  // If it's the last subscription to accelerometer it will stop polling in the native API
+}, 1000);
 
 class ImageRecognition extends Component {
   constructor(props) {
     super(props);
   }
 
+  subscription = () => {
+    accelerometer
+      .pipe(map(({ x, y, z }) => x + y + z), filter(speed => speed > 20))
+      .subscribe(
+        speed => console.log(`You moved your phone with ${speed}`),
+        error => {
+          console.log("The sensor is not available");
+        }
+      );
+  }
   state = {
     firstImagedata: '',
     secImagedata: '',
@@ -44,7 +78,25 @@ class ImageRecognition extends Component {
     FrontAnalysisImage: [],
     LeftFrontAnalysisImage: [],
     RightFrontAnalysisImage: [],
+    filter: [],
+    TextRecgonized: 'null',
+    showCamera: false,
+    showMenu: false,
+    loadingg: false,
+    shashNumberInput:''
   };
+
+  componentDidMount() {
+    this.subscription();
+  }
+  handleImage(image) {
+    this.setState({ photo: image });
+  }
+
+  hideModal() {
+    this.setState({ showCamera: false });
+  }
+
 
   showSnackBar(text) {
     Snackbar.show({
@@ -53,7 +105,7 @@ class ImageRecognition extends Component {
       action: {
         text: 'OK',
         textColor: 'green',
-        onPress: () => {},
+        onPress: () => { },
       },
     });
   }
@@ -62,81 +114,131 @@ class ImageRecognition extends Component {
     // Initialise the Clarifai api
 
     const app = new Clarifai.App({
-      apiKey: 'f6948af254044705b648e9ca1d57fb93',
+      apiKey: 'd28e9bf313754c57bb3745c9fd7c2f09',
     });
-
     // Identify the image
-    app.models
-      .predict(Clarifai.GENERAL_MODEL, path)
-      .then(response => console.log(response.outputs[0].data).catch(err => alert(err)));
+    // var request = require('request'),
+    //   apiKey = 'acc_241045605e79650',
+    //   apiSecret = 'fb31f402f847818fde7d2727eb8fb816',
+    //   imageUrl = 'https://firebasestorage.googleapis.com/v0/b/newprojectcustomer.appspot.com/o/IMG_20200209_093535.jpg?alt=media&token=2fc4eaba-bc96-4543-a494-84127a6c4368';
 
-    // //const picturesDir = firebase.utils.FilePath.PICTURES_DIRECTORY;
+    //   request.get('https://api.imagga.com/v2/tags?image_url='+encodeURIComponent(imageUrl), function (error, response, body) {
+    //   console.log('Status:', response.statusCode);
+    //   console.log('Headers:', JSON.stringify(response.headers));
+    //   console.log('Response:', body);
+    //   }).auth(apiKey, apiSecret, true);
 
-    // const labels = await firebase.vision().cloudImageLabelerProcessImage(path, {
-    //   confidenceThreshold: 0.8,
+    // app.models
+    //   .predict(Clarifai.Ca, path)
+    //   .then(response =>
+    //     console.log(response.outputs[0].data).catch(err => alert(err)),
+    //   );
+    // app.models.predict({ id: 'Car', version: '4bc922f100374c6284de12c3e7506d6c' },
+    //   'https://firebasestorage.googleapis.com/v0/b/newprojectcustomer.appspot.com/o/IMG_20200209_093535.jpg?alt=media&token=2fc4eaba-bc96-4543-a494-84127a6c4368').then(
+    //     function(response) {
+    //       console.log(response.outputs[0].data);
+    //     },
+    //     function (err) {
+    //       // there was an error
+    //     }
+    //   );
+    // app.models.initModel({id: Clarifai.GENERAL_MODEL, version: "aa7f35c01e0642fda5cf400f543e7c40"})
+    // .then(generalModel => {
+    //   return generalModel.predict("the-image-url");
+    // })
+    // .then(response => {
+    //   var concepts = response['outputs'][0]['data']['concepts']
     // });
 
-    // let analyses = [];
+    // const picturesDir = firebase.utils.FilePath.PICTURES_DIRECTORY;
+
+    const labels = await firebase
+      .vision()
+      .cloudTextRecognizerProcessImage(path, {});
+    console.log(labels.text);
+    await this.setState({
+      TextRecgonized: labels.text,
+    });
+    let analyses = [];
     // labels.forEach(response => {
-    //   if (response.confidence > 0.5858379220962524) {
+    //   if (response.confidence > 0.1858379220962524) {
     //     if (index === 1) {
     //       console.log('Landmark: ', response);
     //       analyses.push(response);
-    //     } else {
-    //       this.setState({
-    //         FrontAnalysisImage: analyses,
-    //       });
-    //       return;
     //     }
     //     if (index === 2) {
     //       console.log('Landmark: ', response);
     //       analyses.push(response);
-    //     } else {
-    //       this.setState({
-    //         FrontAnalysisImage: analyses,
-    //       });
-    //       return;
     //     }
     //   }
     // });
-
-    // try {
-    //   if (analyses.length > 2) {
-    //     if (labels) {
-    //       console.log(labels);
-    //     }
-    //     this.setState({
-    //       loading: false,
-    //     });
-    //   } else {
-    //     Snackbar.show({
-    //       text:
-    //         'Image must be have more details and more clarity about the car and around it !!!',
-    //       duration: Snackbar.LENGTH_LONG,
-    //       action: {
-    //         text: 'UNDO',
-    //         textColor: 'green',
-    //         onPress: () => {},
-    //       },
-    //     });
-    //   }
-    // } catch (error) {
-    //   Snackbar.show({
-    //     text: 'error occur please try again' + error,
-    //     duration: Snackbar.LENGTH_LONG,
-    //     action: {
-    //       text: 'UNDO',
-    //       textColor: 'green',
-    //       onPress: () => {},
-    //     },
-    //   });
-    // }
+    if (index === 1) {
+      this.setState({
+        FrontAnalysisImage: analyses,
+      });
+    }
+    if (index === 2) {
+      this.setState({
+        LeftFrontAnalysisImage: analyses,
+      });
+    }
+    try {
+      if (analyses.length > 0) {
+        if (this.state.FrontAnalysisImage) {
+          console.log('front', this.state.FrontAnalysisImage);
+          if (this.state.LeftFrontAnalysisImage.length > 0) {
+            // console.log('left', this.state.LeftFrontAnalysisImage);
+            for (var i = 0; i < this.state.FrontAnalysisImage.length - 1; i++) {
+              for (
+                var n = 0;
+                n < this.state.LeftFrontAnalysisImage.length - 1;
+                n++
+              ) {
+                if (
+                  this.state.LeftFrontAnalysisImage[n].text ===
+                  this.state.FrontAnalysisImage[i].text
+                ) {
+                  this.state.filter.push(
+                    this.state.LeftFrontAnalysisImage[n].text,
+                  );
+                }
+              }
+            }
+            console.log('my filter', this.state.filter);
+          }
+        }
+        this.setState({
+          loading: false,
+        });
+      } else {
+        Snackbar.show({
+          text:
+            'Image must be have more details and more clarity about the car and around it !!!',
+          duration: Snackbar.LENGTH_LONG,
+          action: {
+            text: 'UNDO',
+            textColor: 'green',
+            onPress: () => { },
+          },
+        });
+      }
+    } catch (error) {
+      Snackbar.show({
+        text: '' + error,
+        duration: Snackbar.LENGTH_LONG,
+        action: {
+          text: 'UNDO',
+          textColor: 'green',
+          onPress: () => { },
+        },
+      });
+    }
   }
 
   showPicker = index => {
     const options = {
       title: 'Choose Picture',
-      customButtons: [{name: 'remove', title: 'Remove'}],
+      customButtons: [{ name: 'remove', title: 'Remove' }],
       storageOptions: {
         skipBackup: false,
         path: 'images',
@@ -167,32 +269,35 @@ class ImageRecognition extends Component {
         //   );
         //   return;
         // }
-        if (response.fileSize < 2655555) {
-          this.showSnackBar(
-            'Image Quality is too low try using onther device or try again',
-          );
-          return;
-        }
+        // if (response.fileSize < 2655555) {
+        //   this.showSnackBar(
+        //     'Image Quality is too low try using onther device or try again',
+        //   );
+        //   return;
+        // }
         // no problem
         if (index === 1) {
-          this.ProccessingImage(response.data, index);
+          this.ProccessingImage(response.uri, index);
+          console.log(response.latitude, index);
+          console.log(response.longitude, index);
+
           this.setState({
             firstImagedata: response,
-            firstImage: {uri: response.uri},
+            firstImage: { uri: response.uri },
             loading: true,
           });
         } else if (index === 2) {
           this.ProccessingImage(response.uri, index);
           this.setState({
             secImagedata: response,
-            secImage: {uri: response.uri},
+            secImage: { uri: response.uri },
             loading: true,
           });
         } else if (index === 3) {
           this.ProccessingImage(response.uri, index);
           this.setState({
             thirdImageData: response,
-            thirdImage: {uri: response.uri},
+            thirdImage: { uri: response.uri },
             loading: true,
           });
         } else if (index === 4) {
@@ -214,7 +319,7 @@ class ImageRecognition extends Component {
         />
         <Button
           onPress={() => {
-            this.setState({start: true});
+            this.setState({ start: true });
           }}
           title="Let's check our car"
         />
@@ -238,41 +343,48 @@ class ImageRecognition extends Component {
                 alignItems: 'center',
                 alignSelf: 'center',
               }}>
-              <TouchableOpacity
-                onPress={() => {
-                  this.showPicker(1);
+              <TouchableRipple
+                style={{
+                  borderRadius: 50
                 }}
-                style={Styles.Touchable}>
-                <Image
-                  source={this.state.firstImage}
-                  style={Styles.uploadAvatar}
-                />
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                style={Styles.Touchable}
                 onPress={() => {
-                  this.showPicker(2);
-                }}>
-                <Image
-                  source={this.state.secImage}
-                  style={Styles.uploadAvatar}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  this.showPicker(3);
+                  this.setState({
+                    showCamera: true,
+                  });
                 }}
-                style={Styles.Touchable}>
-                <Image
-                  source={this.state.thirdImage}
-                  style={Styles.uploadAvatar}
-                />
-              </TouchableOpacity>
+                rippleColor="rgba(0,0,0, 0.05)">
+                {this.state.photo ? (
+                  <Avatar.Image
+                    size={85}
+                    source={{ uri: this.state.photo }}
+                  />
+                ) : (
+                    <Avatar.Icon size={85} icon="camera" />
+                  )}
+              </TouchableRipple>
             </View>
-            <Button onPress={this.ApiImageSimilarty} title="add" />
+            <TextInput
+              label='Enter Shaseh Number'
+              value={this.state.shashNumberInput}
+              onChangeText={shashNumberInput => this.setState({ shashNumberInput })}
+            />
+            <Modal
+              style={Styles.cameraModal}
+              visible={this.state.showCamera}>
+              <Camera
+                handleImage={image => this.handleImage(image)}
+                hideModal={() =>
+                  this.hideModal()}
+                handleInputs={
+                    this.state.shashNumberInput
+                }  
+              />
+            </Modal>
+
           </View>
+
         )}
+
       </View>
     );
   }
