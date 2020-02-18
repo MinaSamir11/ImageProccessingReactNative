@@ -1,0 +1,353 @@
+Vehicle door
+City car
+Vehicle 
+Vehicle registration plate   // unique  2 phases 
+Road     
+Hatchback     
+Asphalt
+Bumper    ممتص الصدمات
+Vehicle door      // unique 
+Automotive lighting
+Car
+Transport
+Trunk
+Land vehicle
+Automotive exterior
+Automotive lighting      // unique from 2 phases 
+Automotive wheel system
+Subcompact car
+Motor vehicle 
+Sport utility vehicle
+Supermini                         
+Family car
+Automotive tire 
+Luxury vehicle
+Tire
+Metal
+rim  
+Wheel
+Automotive design   // door 
+Hot hatch
+Headlamp   // front   // unique 2 phases
+Hood     غطاء محرك السياره  // unique 
+Auto part
+let frontPartsmayUnique = [
+Headlamp,
+Automotive lighting,
+Hood,
+Bumper,
+Vehicle registration plate,
+Wheel
+];
+let BackPartmayUnique=[
+Hatchback,
+Vehicle,
+Vehicle registration plate,
+];
+/////////////////////////////////////////////////////////////////////
+[
+  {
+    "confidence": 0.9961627125740051,
+    "entityId": "/m/01prls",
+    "text": "Land vehicle"
+  },
+  {
+    "confidence": 0.9903031587600708,
+    "entityId": "/m/07yv9",
+    "text": "Vehicle"
+  },
+  {
+    "confidence": 0.9870125651359558,
+    "entityId": "/m/0k4j",
+    "text": "Car"
+  },
+  {
+    "confidence": 0.9010037183761597,
+    "entityId": "/m/012f08",
+    "text": "Motor vehicle"
+  },
+  {
+    "confidence": 0.8449885845184326,
+    "entityId": "/m/01cmcs",
+    "text": "Hatchback"
+  },
+  {
+    "confidence": 0.8396846055984497,
+    "entityId": "/m/02q8tbd",
+    "text": "Alloy wheel"
+  },
+  {
+    "confidence": 0.7238035202026367,
+    "entityId": "/m/03qcfgl",
+    "text": "Dacia sandero"
+  },
+  {
+    "confidence": 0.7228396534919739,
+    "entityId": "/m/068mqj",
+    "text": "Automotive design"
+  },
+  {
+    "confidence": 0.708760678768158,
+    "entityId": "/m/047vmg8",
+    "text": "Rim"
+  },
+  {
+    "confidence": 0.6903424263000488,
+    "entityId": "/m/088l6h",
+    "text": "Family car"
+  },
+  {
+    "confidence": 0.6540399193763733,
+    "entityId": "/m/0h8ly30",
+    "text": "Automotive wheel system"
+  },
+  {
+    "confidence": 0.6232060790061951,
+    "entityId": "/m/083p6f",
+    "text": "Supermini"
+  },
+  {
+    "confidence": 0.6188929677009583,
+    "entityId": "/m/0369ss",
+    "text": "City car"
+  },
+  {
+    "confidence": 0.6143558025360107,
+    "entityId": "/m/02mnkq",
+    "text": "Bumper"
+  },
+  {
+    "confidence": 0.6117444634437561,
+    "entityId": "/m/02swz_",
+    "text": "Compact car"
+  },
+  {
+    "confidence": 0.5881089568138123,
+    "entityId": "/m/0ctrp",
+    "text": "Sport utility vehicle"
+  },
+  {
+    "confidence": 0.5251690745353699,
+    "entityId": "/m/083wq",
+    "text": "Wheel"
+  },
+  {
+    "confidence": 0.5136164426803589,
+    "entityId": "/m/0215_s",
+    "text": "Hot hatch"
+  },
+  {
+    "confidence": 0.5114516019821167,
+    "entityId": "/m/04t7l",
+    "text": "Metal"
+  }
+]
+
+///////////////////////////////////////////////////////////////////////////////
+
+[
+  {
+    "confidence": 0.9961627125740051,
+    "entityId": "/m/01prls",
+    "text": "Land vehicle"
+  },
+  {
+    "confidence": 0.9903031587600708,
+    "entityId": "/m/07yv9",
+    "text": "Vehicle"
+  },
+  {
+    "confidence": 0.9870125651359558,
+    "entityId": "/m/0k4j",
+    "text": "Car"
+  },
+  {
+    "confidence": 0.9829329252243042,
+    "entityId": "/m/012f08",
+    "text": "Motor vehicle"
+  },
+  {
+    "confidence": 0.9664361476898193,
+    "entityId": "/m/0h8pb3l",
+    "text": "Automotive tire"
+  },
+  {
+    "confidence": 0.9551782608032227,
+    "entityId": "/m/0h9mv",
+    "text": "Tire"
+  },
+  {
+    "confidence": 0.9542647004127502,
+    "entityId": "/m/02q8tbd",
+    "text": "Alloy wheel"
+  },
+  {
+    "confidence": 0.9535553455352783,
+    "entityId": "/m/019sc",
+    "text": "Black"
+  },
+  {
+    "confidence": 0.9396566152572632,
+    "entityId": "/m/02q2kc3",
+    "text": "Vehicle door"
+  },
+  {
+    "confidence": 0.8898206949234009,
+    "entityId": "/m/07bsy",
+    "text": "Transport"
+  },
+  {
+    "confidence": 0.8866599798202515,
+    "entityId": "/m/068mqj",
+    "text": "Automotive design"
+  },
+  {
+    "confidence": 0.8846282958984375,
+    "entityId": "/m/083wq",
+    "text": "Wheel"
+  },
+  {
+    "confidence": 0.8720222115516663,
+    "entityId": "/m/01cmcs",
+    "text": "Hatchback"
+  },
+  {
+    "confidence": 0.8604570627212524,
+    "entityId": "/m/0h8ls87",
+    "text": "Automotive exterior"
+  },
+  {
+    "confidence": 0.8430397510528564,
+    "entityId": "/m/0369ss",
+    "text": "City car"
+  },
+  {
+    "confidence": 0.8136477470397949,
+    "entityId": "/m/02mnkq",
+    "text": "Bumper"
+  },
+  {
+    "confidence": 0.8081701397895813,
+    "entityId": "/m/079bkr",
+    "text": "Mode of transport"
+  },
+  {
+    "confidence": 0.8066789507865906,
+    "entityId": "/m/047vmg8",
+    "text": "Rim"
+  },
+  {
+    "confidence": 0.8060928583145142,
+    "entityId": "/m/0h8ly30",
+    "text": "Automotive wheel system"
+  },
+  {
+    "confidence": 0.7381446361541748,
+    "entityId": "/m/04t7l",
+    "text": "Metal"
+  }
+]
+
+////////////////////////////////////////////////////////////////////////
+[
+  {
+    "confidence": 0.9961627125740051,
+    "entityId": "/m/01prls",
+    "text": "Land vehicle"
+  },
+  {
+    "confidence": 0.9903031587600708,
+    "entityId": "/m/07yv9",
+    "text": "Vehicle"
+  },
+  {
+    "confidence": 0.9870125651359558,
+    "entityId": "/m/0k4j",
+    "text": "Car"
+  },
+  {
+    "confidence": 0.9816625714302063,
+    "entityId": "/m/02q8tbd",
+    "text": "Alloy wheel"
+  },
+  {
+    "confidence": 0.9811444282531738,
+    "entityId": "/m/012f08",
+    "text": "Motor vehicle"
+  },
+  {
+    "confidence": 0.9652983546257019,
+    "entityId": "/m/019sc",
+    "text": "Black"
+  },
+  {
+    "confidence": 0.9649977087974548,
+    "entityId": "/m/01g5v",
+    "text": "Blue"
+  },
+  {
+    "confidence": 0.9613861441612244,
+    "entityId": "/m/01cmcs",
+    "text": "Hatchback"
+  },
+  {
+    "confidence": 0.958041250705719,
+    "entityId": "/m/0h8pb3l",
+    "text": "Automotive tire"
+  },
+  {
+    "confidence": 0.9420275688171387,
+    "entityId": "/m/0h9mv",
+    "text": "Tire"
+  },
+  {
+    "confidence": 0.9283936023712158,
+    "entityId": "/m/083wq",
+    "text": "Wheel"
+  },
+  {
+    "confidence": 0.8898206949234009,
+    "entityId": "/m/07bsy",
+    "text": "Transport"
+  },
+  {
+    "confidence": 0.8841419816017151,
+    "entityId": "/m/047vmg8",
+    "text": "Rim"
+  },
+  {
+    "confidence": 0.8808704018592834,
+    "entityId": "/m/02q2kc3",
+    "text": "Vehicle door"
+  },
+  {
+    "confidence": 0.8701314926147461,
+    "entityId": "/m/0h8ls87",
+    "text": "Automotive exterior"
+  },
+  {
+    "confidence": 0.8394080996513367,
+    "entityId": "/m/079bkr",
+    "text": "Mode of transport"
+  },
+  {
+    "confidence": 0.8343334794044495,
+    "entityId": "/m/0h8ly30",
+    "text": "Automotive wheel system"
+  },
+  {
+    "confidence": 0.8215083479881287,
+    "entityId": "/m/068mqj",
+    "text": "Automotive design"
+  },
+  {
+    "confidence": 0.7995328307151794,
+    "entityId": "/m/02mnkq",
+    "text": "Bumper"
+  },
+  {
+    "confidence": 0.7695488929748535,
+    "entityId": "/m/03vtbc",
+    "text": "Silver"
+  }
+]
