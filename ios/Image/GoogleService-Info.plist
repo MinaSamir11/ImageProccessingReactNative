@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>180280070267-qd026663ova86m36s23gjgg6tpoea7va.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.180280070267-qd026663ova86m36s23gjgg6tpoea7va</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAbzfs-Ir6RyAbCR2Rn4b-xSCZwSJnpPp8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>180280070267</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>org.reactjs.native.com.Image</string>
+	<key>PROJECT_ID</key>
+	<string>bucket-11</string>
+	<key>STORAGE_BUCKET</key>
+	<string>bucket-11.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:180280070267:ios:f014cfa9f0f93af7e3d2de</string>
+	<key>DATABASE_URL</key>
+	<string>https://bucket-11.firebaseio.com</string>
+</dict>
+</plist>
